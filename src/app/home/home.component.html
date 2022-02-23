@@ -1,0 +1,36 @@
+<main>
+    <section>
+        <form class="searchBox" [formGroup]="travelForm" (ngSubmit)="submit()">
+            <div class="cities">
+                <input type="text" list="departure" placeholder="Départ" formControlName="departure" (change)="getPopArrival($event)" (keyup)="search($event)">
+                <datalist id="departure">
+                    <option *ngFor="let c of results" [value]="c.unique_name">{{c.local_name}}</option>
+                    </datalist>
+                <input type="text" list="popularArrival" placeholder="Arrivée" formControlName="arrival">
+                <datalist id="popularArrival">
+                    <option *ngFor="let pa of Arrival" [value]="pa.unique_name">{{pa.local_name}}</option>
+                </datalist>
+            </div>
+            <div class="date">
+                <input type="date" formControlName="date" [min]="today | date:'yyyy-MM-dd'">
+                <input type="time" formControlName="hour">
+            </div>
+            <button type="submit" [disabled]="!travelForm.valid">Validez pour voir les détails</button>
+        </form>
+
+    </section>
+</main>
+
+
+
+<!-- <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Number</mat-label>
+        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form> -->
