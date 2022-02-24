@@ -4,6 +4,6 @@
 </header>
 <nav>
     <li><a routerLink='home'>Accueil</a></li>
-    <li><a routerLink='detail'>Détails du voyage</a></li>
+    <li><a routerLink='detail' *ngIf="cityService.travel.length!=0">Détails du voyage</a></li>
     <li><a routerLink="contact">Contact</a></li>
 </nav>

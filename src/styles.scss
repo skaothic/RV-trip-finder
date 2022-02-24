@@ -6,6 +6,23 @@ html {
 
 a {
     text-decoration: none;
+    color: black;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: fit-content;
+}
+
+body {
+    margin: 2%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    max-width: 1500px;
+    @media (min-width: 1500px) {
+        margin: 2% auto
+    }
+}
+
+li {
+    list-style: none;
+}

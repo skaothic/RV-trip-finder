@@ -45,23 +45,26 @@ public search(str:string):Observable<HttpResponse>{
 
 public emitTravelSubject() {
   this.travelSubject.next(this.travel.slice());
-  console.table(this.travel)
+ 
 }
 
-public addTravel(dep: string, arr: string,date:string,hour:string) {
+public addTravel(dep: string, arr: string,date:string,hour:string,depVal:string,arrVal:string) {
   const travelObject = {
     dep: '',
     arr: '',
     date:'',
     hour:'',
+depVal:'',
+arrVal:''
   };
   console.table(travelObject)
   travelObject.dep = dep;
   travelObject.arr = arr;
   travelObject.date = date;
   travelObject.hour = hour;
+  travelObject.depVal=depVal;
+  travelObject.arrVal=arrVal
   this.travel.push(travelObject);
   this.emitTravelSubject();
-
 }
 }

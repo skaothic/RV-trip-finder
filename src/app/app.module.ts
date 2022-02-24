@@ -10,7 +10,11 @@ import { DetailComponent } from './detail/detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { CityService } from './service/city.service';
-import { AngularMaterialModule } from './angular-material.module';
+import localeFr from '@angular/common/locales/fr'
+import { registerLocaleData } from '@angular/common';
+import { SafePipeModule } from 'safe-pipe';
+registerLocaleData (localeFr,'fr')
+
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import { AngularMaterialModule } from './angular-material.module';
     FormsModule,
     ReactiveFormsModule,
  HttpClientModule,
+ SafePipeModule
   ],
   providers: [CityService],
   bootstrap: [AppComponent]

@@ -15,7 +15,7 @@ export class DetailComponent implements OnInit {
   constructor(private cityService:CityService) { }
 
   ngOnInit(): void {
-    this.mapURL="http://maps.google.com/maps?saddr="+this.cityService.travel[0].dep+"&daddr="+this.cityService.travel[0].arr+"&ie=UTF8&output=embed"
+    this.mapURL="http://maps.google.com/maps?saddr="+this.cityService.travel[0].depVal+"&daddr="+this.cityService.travel[0].arrVal+"&ie=UTF8&output=embed"
    
   }
 

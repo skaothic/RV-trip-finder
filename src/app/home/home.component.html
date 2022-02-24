@@ -1,4 +1,4 @@
-<main>
+<main id="home">
     <section>
         <form class="searchBox" [formGroup]="travelForm" (ngSubmit)="submit()">
             <div class="cities">
@@ -6,9 +6,9 @@
                 <datalist id="departure">
                     <option *ngFor="let c of results" [value]="c.unique_name">{{c.local_name}}</option>
                     </datalist>
-                <input type="text" list="popularArrival" placeholder="Arrivée" formControlName="arrival">
+                <input type="text" list="popularArrival" placeholder="Arrivée" formControlName="arrival" (keyup)="searchArrival($event)">
                 <datalist id="popularArrival">
-                    <option *ngFor="let pa of Arrival" [value]="pa.unique_name">{{pa.local_name}}</option>
+                    <option *ngFor="let a of Arrival" [value]="a.unique_name">{{a.local_name}}</option>
                 </datalist>
             </div>
             <div class="date">
@@ -17,20 +17,5 @@
             </div>
             <button type="submit" [disabled]="!travelForm.valid">Validez pour voir les détails</button>
         </form>
-
     </section>
 </main>
-
-
-
-<!-- <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Number</mat-label>
-        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-</form> -->

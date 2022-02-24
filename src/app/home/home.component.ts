@@ -25,10 +25,15 @@ constructor(private cityservice:CityService) { }
     
   ngOnInit(): void {
     this.getPop()
-    console.log(this.travelForm.get('date').value)
+    this.adaptBCKGD()
+    console.log(document.getElementById('home').getAttribute('color'))
   }
 
  
+private adaptBCKGD(){
+    document.getElementById('home').setAttribute('height',(window.innerHeight+"px"))
+    document.getElementById('home').setAttribute("color","yellow")
+}
 
 private getPop():void{
   this.cityservice.getPop()
@@ -51,7 +56,9 @@ public search(x:any){
       console.log(response.message)
     }
   })
-  }public searchArrival(x:any){
+  }
+  
+public searchArrival(x:any){
     this.cityservice.search(x.target.value)
     .subscribe((response:HttpResponse)=>{
       if (response.status===200){
@@ -79,10 +86,14 @@ public getPopArrival(event:any):void{
 }
 
 public submit(){
- const dep:string=this.travelForm.get('departure').value
-  const arr:string=this.travelForm.get('arrival').value
+  console.log(this.results[0].local_name)
+  this.travelForm.setValue
+ const dep:string=this.results[0].local_name
+  const arr:string=this.Arrival[0].local_name
+  const depVal:string=this.travelForm.get('departure').value
+  const arrVal:string=this.travelForm.get('arrival').value
   const date:string=this.travelForm.get('date').value
  const hour:string=this.travelForm.get('hour').value
-  this.cityservice.addTravel(dep,arr,date,hour)
+  this.cityservice.addTravel(dep,arr,date,hour,depVal,arrVal)
   }
 }
