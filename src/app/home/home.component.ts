@@ -10,10 +10,16 @@ import { map,startWith } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  
+//mise en place de tableau contenant les futurs villes correspondantes aux saisies ou les plus populaires en l'absence de saisie
 public results:Array<any>=[]
 public Arrival:Array<any>=[]
-public today:number=Date.now()
+
+ //récupération date du jour pour limiter la saisie d'une date antérieur à aujourd'hui
+ public today:number=Date.now()
+
 constructor(private cityservice:CityService) { }
+
   public travelForm: FormGroup = new FormGroup({
     ["departure"]: new FormControl("",[Validators.required]),
     ["arrival"]: new FormControl("",[Validators.required]),
@@ -25,16 +31,11 @@ constructor(private cityservice:CityService) { }
     
   ngOnInit(): void {
     this.getPop()
-    this.adaptBCKGD()
-    console.log(document.getElementById('home').getAttribute('color'))
   }
 
  
-private adaptBCKGD(){
-    document.getElementById('home').setAttribute('height',(window.innerHeight+"px"))
-    document.getElementById('home').setAttribute("color","yellow")
-}
 
+//recupération des villes les plus polaires au départ 
 private getPop():void{
   this.cityservice.getPop()
   .subscribe((response:HttpResponse)=>{
@@ -46,6 +47,8 @@ private getPop():void{
     }
   })
 }
+
+//récupération des villes correspondantes à la saisie du champ "départ" 
 public search(x:any){
   this.cityservice.search(x.target.value)
   .subscribe((response:HttpResponse)=>{
@@ -58,18 +61,7 @@ public search(x:any){
   })
   }
   
-public searchArrival(x:any){
-    this.cityservice.search(x.target.value)
-    .subscribe((response:HttpResponse)=>{
-      if (response.status===200){
-        this.Arrival= response.body
-      }
-      else {
-        console.log(response.message)
-      }
-    })
-    }
-
+  //une fois le champ "départ" valide récupération des destinations populaires
 public getPopArrival(event:any):void{
   if (event.target.value) {
     let city = event.target.value;
@@ -84,7 +76,21 @@ public getPopArrival(event:any):void{
     })
   }
 }
+  
+//si les destin&ations populaires ne sont pas la cible récupération des destinations correspondantes à la saisie dans le champs ""arrivée"
+public searchArrival(x:any){
+    this.cityservice.search(x.target.value)
+    .subscribe((response:HttpResponse)=>{
+      if (response.status===200){
+        this.Arrival= response.body
+      }
+      else {
+        console.log(response.message)
+      }
+    })
+    }
 
+//validation du voyage après que tous les champs soit remplis enregistrement d'un tableau récapitulatif pour utilisation ultérieure dans l'onglet "détail"
 public submit(){
   console.log(this.results[0].local_name)
   this.travelForm.setValue

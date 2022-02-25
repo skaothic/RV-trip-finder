@@ -15,6 +15,12 @@
 
 main {
     display: flex;
+    @media(max-width: 1200px) {
+        flex-direction: column;
+        .mapouter {
+            width: 100%;
+        }
+    }
 }
 
 .summary {
